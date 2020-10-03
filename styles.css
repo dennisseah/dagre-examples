@@ -1,0 +1,44 @@
+h3 {
+    margin: 0px;
+    padding-top: 8px;
+}
+
+.node.selected {
+    fill: #990000;
+}
+
+.node.selected rect {
+    stroke: #990000;
+}
+
+text {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+}
+
+.node rect {
+    stroke: #333;
+    fill: #fff;
+    stroke-width: 2px;
+}
+
+.node rect {
+    cursor: pointer;
+}
+
+.node rect text {
+    cursor: pointer;
+}
+
+.edgePath path {
+    stroke: #666;
+    stroke-width: 2px;
+}
+
+.unselected-edge {
+    stroke-dasharray: 5, 5;
+}
+
+.invisible {
+    opacity: 0 !important;
+}

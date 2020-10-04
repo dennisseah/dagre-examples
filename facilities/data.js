@@ -58,14 +58,14 @@ var nodes_list = [
 ];
 
 var edges_list = [
-  { source: "plant1", destination: "oven1" },
-  { source: "plant1", destination: "oven2" },
-  { source: "plant1", destination: "oven3" },
-  { source: "plant1", destination: "packer1" },
-  { source: "plant1", destination: "packer2" },
-  { source: "plant2", destination: "oven21" },
-  { source: "plant2", destination: "oven22" },
-  { source: "plant2", destination: "packer21" },
+  { source: "plant1", destination: "oven1", label: "has" },
+  { source: "plant1", destination: "oven2", label: "has" },
+  { source: "plant1", destination: "oven3", label: "has" },
+  { source: "plant1", destination: "packer1", label: "has" },
+  { source: "plant1", destination: "packer2", label: "has" },
+  { source: "plant2", destination: "oven21", label: "has" },
+  { source: "plant2", destination: "oven22", label: "has" },
+  { source: "plant2", destination: "packer21", label: "has" },
 ];
 
 var locations = {};

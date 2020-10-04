@@ -13,13 +13,13 @@ var nodes_list = [
 ];
 
 var edges_list = [
-  { source: "potatooriginalsm", destination: "oven1" },
-  { source: "potatooriginalsm", destination: "oven2" },
+  { source: "potatooriginalsm", destination: "oven1", label: "selected" },
+  { source: "potatooriginalsm", destination: "oven2", label: "selected" },
   { source: "potatooriginalsm", destination: "oven3", disabled: true },
   { source: "potatooriginalsm", destination: "oven21", disabled: true },
   { source: "potatooriginalsm", destination: "oven22", disabled: true },
-  { source: "oven1", destination: "packer1" },
-  { source: "oven2", destination: "packer1" },
+  { source: "oven1", destination: "packer1", label: "selected" },
+  { source: "oven2", destination: "packer1", label: "selected" },
   { source: "oven3", destination: "packer2", disabled: true },
   { source: "oven21", destination: "packer21", disabled: true },
   { source: "oven22", destination: "packer21", disabled: true },
@@ -29,3 +29,7 @@ var locations = {
   plant1: ["oven1", "oven2", "oven3", "packer1", "packer2"],
   plant2: ["oven21", "oven22", "packer21"],
 };
+
+function getNodeMetadata(id) {
+  return null;
+}

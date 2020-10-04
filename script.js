@@ -71,7 +71,12 @@ function connected_nodes_edges(d) {
 function createGraph() {
   // Create the input graph
   var g = new dagreD3.graphlib.Graph({ compound: true })
-    .setGraph({ align: "UL", rankdir: "LR", ranker: "longest-path" })
+    .setGraph({
+      align: "UL",
+      rankdir: "LR",
+      ranker: "longest-path",
+      nodesep: 25,
+    })
     .setDefaultEdgeLabel(function () {
       return {};
     });
@@ -106,6 +111,7 @@ function createGraph() {
       curve: d3.curveBasis,
       id: String(edge.source) + "-" + String(edge.destination),
       class: edge.disabled ? "edge unselected-edge" : "edge",
+      label: edge.label || "",
     });
   });
 

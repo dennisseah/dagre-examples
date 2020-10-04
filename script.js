@@ -1,5 +1,12 @@
 var SVG_ID = "dag";
 
+// create tooltip
+var div_tooltip = d3
+  .select("body")
+  .append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
 var margin = { top: 50, right: 50, bottom: 50, left: 150 };
 
 var svg = d3
@@ -136,6 +143,21 @@ function createGraph() {
     selected_nodes = connected_nodes_edges(clicked_elem);
     clicked_elem.classList.add("selected");
   });
+
+  nodes
+    .on("mouseover", function (d) {
+      var content = getNodeMetadata(d);
+      if (content) {
+        div_tooltip.transition().duration(200).style("opacity", 0.8);
+        div_tooltip
+          .html(content)
+          .style("left", d3.event.pageX + "px")
+          .style("top", d3.event.pageY - 28 + "px");
+      }
+    })
+    .on("mouseout", function (d) {
+      div_tooltip.transition().duration(500).style("opacity", 0);
+    });
 
   svg.on("click", function () {
     hide_nodes_edges(false);

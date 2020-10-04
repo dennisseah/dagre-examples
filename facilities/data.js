@@ -1,14 +1,60 @@
 var nodes_list = [
-  { name: "plant1", id: "plant1" },
-  { name: "plant2", id: "plant2" },
-  { name: "Oven1", id: "oven1" },
-  { name: "Oven2", id: "oven2" },
-  { name: "Oven3", id: "oven3" },
-  { name: "Packer-1", id: "packer1" },
-  { name: "Packer-2", id: "packer2" },
-  { name: "Oven21", id: "oven21" },
-  { name: "Oven22", id: "oven22" },
-  { name: "Packer-21", id: "packer21" },
+  {
+    name: "plant1",
+    id: "plant1",
+    metadata: {
+      location: "California, Cupertino, 95014",
+      manager: "Hang Zhang",
+    },
+  },
+  {
+    name: "plant2",
+    id: "plant2",
+    metadata: {
+      location: "California, Cupertino, 95014",
+      manager: "Someone Unknown",
+    },
+  },
+  {
+    name: "Oven1",
+    id: "oven1",
+    metadata: { model: "super oven X", lastService: "2020-9-10" },
+  },
+  {
+    name: "Oven2",
+    id: "oven2",
+    metadata: { model: "super oven X", lastService: "2020-9-10" },
+  },
+  {
+    name: "Oven3",
+    id: "oven3",
+    metadata: { model: "super oven X", lastService: "2020-9-10" },
+  },
+  {
+    name: "Packer-1",
+    id: "packer1",
+    metadata: { model: "super packer i", lastService: "2020-9-10" },
+  },
+  {
+    name: "Packer-2",
+    id: "packer2",
+    metadata: { model: "super packer i", lastService: "2020-9-10" },
+  },
+  {
+    name: "Oven21",
+    id: "oven21",
+    metadata: { model: "super oven X", lastService: "2020-9-10" },
+  },
+  {
+    name: "Oven22",
+    id: "oven22",
+    metadata: { model: "super oven X", lastService: "2020-9-10" },
+  },
+  {
+    name: "Packer-21",
+    id: "packer21",
+    metadata: { model: "super packer i", lastService: "2020-9-10" },
+  },
 ];
 
 var edges_list = [
@@ -23,3 +69,15 @@ var edges_list = [
 ];
 
 var locations = {};
+
+function getNodeMetadata(id) {
+  var found = nodes_list.find(function (n) {
+    return n.id === id;
+  });
+  if (found && !!found.metadata) {
+    return Object.keys(found.metadata).reduce(function (a, c) {
+      return a + c + ": " + found.metadata[c] + "<br />";
+    }, "");
+  }
+  return null;
+}

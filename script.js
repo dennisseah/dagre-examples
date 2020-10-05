@@ -107,12 +107,35 @@ function createGraph() {
 
   // Set up edges, no special attributes.
   edges_list.forEach(function (edge) {
-    g.setEdge(edge.source, edge.destination, {
+    var opts = {
       curve: d3.curveBasis,
       id: String(edge.source) + "-" + String(edge.destination),
       class: edge.disabled ? "edge unselected-edge" : "edge",
-      label: edge.label || "",
-    });
+    };
+
+    if (edge.label) {
+      var svg_edge_label = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "text"
+      );
+      var edge_tspan = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "tspan"
+      );
+      edge_tspan.setAttributeNS(
+        "http://www.w3.org/XML/1998/namespace",
+        "xml:space",
+        "preserve"
+      );
+      // edge_tspan.setAttribute("dy", "1rem");
+      edge_tspan.setAttribute("x", "1");
+      edge_tspan.textContent = edge.label;
+      svg_edge_label.appendChild(edge_tspan);
+
+      opts["label"] = svg_edge_label;
+      opts["labelType"] = "svg";
+    }
+    g.setEdge(edge.source, edge.destination, opts);
   });
 
   var zoom = d3.zoom().on("zoom", function () {

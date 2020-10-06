@@ -20,6 +20,7 @@ var svgGroup = svg.append("g");
 
 function hide_nodes_edges(hide) {
   var edges = svgGroup.selectAll(".edge");
+  var edgeLabels = svgGroup.selectAll(".edgeLabelText");
   var nodes = svgGroup.selectAll(".node");
   edges._groups[0].forEach(function (edge) {
     if (hide) {
@@ -36,11 +37,19 @@ function hide_nodes_edges(hide) {
     }
     node.classList.remove("selected");
   });
+  edgeLabels._groups[0].forEach(function (label) {
+    if (hide) {
+      label.classList.add("invisible");
+    } else {
+      label.classList.remove("invisible");
+    }
+  });
 }
 
 function connected_nodes_edges(d) {
   hide_nodes_edges(true);
   var edges = svgGroup.selectAll(".edge");
+  var edgeLabels = svgGroup.selectAll(".edgeLabelText");
   var nodes = svgGroup.selectAll(".node");
   var selected_node_id = {};
 
@@ -57,6 +66,22 @@ function connected_nodes_edges(d) {
 
     if (source_id === d.id || destination_id === d.id) {
       edge.classList.remove("invisible");
+    }
+  });
+
+  edgeLabels._groups[0].forEach(function (label) {
+    var source_id = label.id.substring(4).split("-")[0];
+    var destination_id = label.id.substring(4).split("-")[1];
+
+    if (source_id === d.id) {
+      selected_node_id[destination_id] = true;
+    }
+    if (destination_id === d.id) {
+      selected_node_id[source_id] = true;
+    }
+
+    if (source_id === d.id || destination_id === d.id) {
+      label.classList.remove("invisible");
     }
   });
 
@@ -107,9 +132,10 @@ function createGraph() {
 
   // Set up edges, no special attributes.
   edges_list.forEach(function (edge) {
+    var id = String(edge.source) + "-" + String(edge.destination);
     var opts = {
       curve: d3.curveBasis,
-      id: String(edge.source) + "-" + String(edge.destination),
+      id,
       class: edge.disabled ? "edge unselected-edge" : "edge",
     };
 
@@ -131,6 +157,8 @@ function createGraph() {
       edge_tspan.setAttribute("x", "1");
       edge_tspan.textContent = edge.label;
       svg_edge_label.appendChild(edge_tspan);
+      svg_edge_label.classList.add("edgeLabelText");
+      svg_edge_label.setAttribute("id", "lbl-" + id);
 
       opts["label"] = svg_edge_label;
       opts["labelType"] = "svg";

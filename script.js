@@ -109,7 +109,7 @@ function createGraph() {
   nodes_list.forEach(function (node) {
     g.setNode(node.id, {
       label: node.name,
-      class: "node",
+      class: node.type ? "node " + node.type : "node",
       id: node.id || "0",
       style: node.location === true ? "fill: #efefef; rx:10, ry:10" : undefined,
       clusterLabelPos: "top",

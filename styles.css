@@ -43,6 +43,18 @@ text {
     opacity: 0 !important;
 }
 
+.product rect {
+    stroke: orange;
+}
+
+.oven rect {
+    stroke: maroon;
+}
+
+.packer rect {
+    stroke: darkgreen;
+}
+
 div.tooltip {
     position: absolute;
     text-align: left;
